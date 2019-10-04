@@ -1,0 +1,11 @@
+//Firebase
+what is config?
+auth() and firestore()
+setCustomParameters ?
+auth.signInWithPopup()? any alternate ?
+authChanges and unsubscribeFromAuth?
+async api request
+async and await
+
+
+//Redux:

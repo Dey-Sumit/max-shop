@@ -11,6 +11,7 @@
     padding: 15px 50px;
     font-size: 25px;
     font-family:cursive;
+
     color: #9fa6a1;
     text-decoration:none;
 
@@ -25,10 +26,12 @@
     .option{
       padding: 0 20px;
       text-decoration: none;
-      transition:0.3s;
+      transition:0.2s;
+      cursor: pointer;
+
       &:hover{
-        color: #fff;
-        border-bottom: 2px solid #fff;
+        /*color: #fff;*/
+        border-bottom: 2px solid #000;
         border-width:medium;
       }
   }

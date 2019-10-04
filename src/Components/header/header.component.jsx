@@ -3,7 +3,16 @@ import './header.styles.scss';
 import {
   Link
 } from 'react-router-dom';
-const Header = () => (
+import {
+  auth
+} from '../../firebase/firebase.utils';
+import {
+  connect
+} from 'react-redux';
+
+const Header = ({
+  currentUser
+}) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
       Sumax
@@ -18,7 +27,17 @@ const Header = () => (
       <Link className='option' to='/shop'>
         ABOUT
       </Link>
+      {
+        currentUser?<div className='option' onClick={()=>auth.signOut()}>SIGN OUT</div>:
+        <Link className='option' to='/signin'>SIGN IN</Link>
+      }
     </div>
   </div>
 )
-export default Header;
+
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+
+})
+
+export default connect(mapStateToProps)(Header);
