@@ -5,7 +5,8 @@ import Header from './Components/header/header.component.jsx';
 import SignInAndSignUP from './Pages/sign-in and sign-up/sign-in-and-sign-up.component.jsx';
 import {
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import {
   auth,
@@ -72,8 +73,15 @@ class App extends React.Component {
         <Header/>
         <Switch>
           <Route exact path='/' component={HomePage}/>
-          <Route path='/signin' component={SignInAndSignUP}/>
           <Route path='/shop' component={ShopPage}/>
+          {/*<Route path='/signin' component={SignInAndSignUP}/>*/}
+          <Route exact
+           path='/signin'
+           render={()=>
+             this.props.currentUser?
+             (<Redirect to='/' />):
+              (<SignInAndSignUP/>)
+            }/>
         </Switch>
       </div>
     );
@@ -81,8 +89,14 @@ class App extends React.Component {
   }
 
 }
+//destructure user
+const mapStateToProps = ({
+  user
+}) => ({
+  currentUser: user.currentUser
+})
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
