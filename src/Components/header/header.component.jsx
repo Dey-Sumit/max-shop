@@ -9,9 +9,11 @@ import {
 import {
   connect
 } from 'react-redux';
-
+import Icon from '../cart-icon/cart-icon.component.jsx';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 const Header = ({
-  currentUser
+  currentUser,
+  hidden
 }) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
@@ -31,13 +33,25 @@ const Header = ({
         currentUser?<div className='option' onClick={()=>auth.signOut()}>SIGN OUT</div>:
         <Link className='option' to='/signin'>SIGN IN</Link>
       }
+    <Icon/>
     </div>
+    {hidden?null:<CartDropdown/>}
+
   </div>
 )
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
 
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+  hidden: state.cart.hidden
 })
+
+/*
+//destructure in advanced way
+const mapStateToProps = ({user: {currentUser}}, {cart: {hidden}}) => ({
+  currentUser,
+  hidden
+})
+*/
 
 export default connect(mapStateToProps)(Header);
